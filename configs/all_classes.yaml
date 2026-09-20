@@ -1,6 +1,0 @@
-# All 10 UNSW-NB15 classes, every class filled up to the majority size.
-# Only keys that differ are listed - everything else is inherited from default.yaml.
-data:
-  classes: all
-balance:
-  mode: max

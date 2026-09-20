@@ -1,7 +1,0 @@
-# Binary formulation of Sec. 4.1 / 4.7:  y in {0 = Normal, 1 = Attack}.
-# The TMG-GAN still works per attack category; only the final classifier is binary.
-data:
-  classes: all
-  task: binary
-balance:
-  mode: max
