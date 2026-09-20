@@ -1,0 +1,56 @@
+# =============================================================================
+# Enhanced TMG-GAN IDS - default configuration
+# Mirrors the experimental setting of the paper (5 traffic classes, Table 2).
+# Section numbers in comments refer to the paper.
+# =============================================================================
+seed: 42
+device: auto            # auto | cpu | cuda
+output_dir: outputs
+
+data:                   # Sec. 4.1 / 4.2
+  train_csv: data/UNSW_NB15_training-set.csv
+  test_csv: data/UNSW_NB15_testing-set.csv    # optional; merged with train_csv, then re-split
+  # Classes used in the paper's Table 2 / Fig. 2. Use `classes: all` for all 10 UNSW-NB15 classes.
+  classes: [Normal, DoS, Reconnaissance, Shellcode, Worms]
+  task: multiclass      # multiclass | binary (y in {0,1}: 0 = Normal, 1 = Attack, Sec. 4.1)
+  test_size: 0.2        # Sec. 4.2: 70-80 % train / 20-30 % test
+  categorical_cols: [proto, service, state]
+  max_categories: 10    # one-hot keeps the N most frequent values per column, rest -> "other"
+  log_transform: false  # optional log1p before min-max (NOT in the paper; helps heavy-tailed features)
+
+gan:                    # Sec. 3.5.3 / 4.3, Algorithm 1
+  z_dim: 64
+  g_hidden: [128, 256]
+  f_hidden: [256, 128]  # shared feature extractor F
+  epochs: 2000          # T
+  d_iters: 1            # t_d
+  g_iters: 1            # t_g
+  batch_size: 64        # per class
+  lr_g: 0.0002
+  lr_d: 0.0002
+  lambda_cos: 1.0       # lambda in  L_total = L_G + lambda * L_cos
+  inter_class_weight: 1.0   # weight of the inter-class (overlap-reducing) cosine term
+  lambda_cls: 1.0       # generator classification loss (from the base TMG-GAN paper)
+  log_every: 200
+
+balance:                # Sec. 3.5.4, Algorithm 2
+  mode: fixed           # fixed: add n_synthetic to every minority class | max: fill up to majority size
+  n_synthetic: 10000    # Table 2 row totals = original count + 10 000
+  majority_classes: [Normal]   # classes that are never oversampled (mode: fixed)
+  max_attempt_factor: 20       # Algorithm 2 safety stop: at most factor * n generator draws
+
+classifier:             # Sec. 3.5.5 / 3.5.6 / 4.4 / 4.5 / 4.6, Algorithm 3
+  hidden: [128, 64]
+  dropout: 0.2
+  epochs: 30
+  batch_size: 256
+  lr: 0.001
+  optimizer: adam       # adam | sgd  (sgd == the plain update rule of Sec. 4.6)
+  focal_gamma: 2.0      # gamma
+  focal_alpha: null     # alpha: null (=1) | balanced | list of per-class weights
+  attention_rescale: true   # X' = n * alpha (.) X  keeps the input scale (alpha sums to 1)
+  val_fraction: 0.1
+
+eval:
+  average: macro        # macro | weighted  (averaging for Precision / Recall / F1)
+  tsne_samples_per_group: 300
