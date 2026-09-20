@@ -1,0 +1,6 @@
+Metric,Implied by Table 2,Reported in Table 1
+Accuracy,0.8776,0.8291
+Precision,0.8438,0.8675
+Recall,0.8516,0.8121
+F1-score,0.8471,0.8177
+FAR,0.0657,not reported

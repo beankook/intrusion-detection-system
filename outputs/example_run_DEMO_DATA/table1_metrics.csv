@@ -1,0 +1,6 @@
+Metric,Focal Loss + Attention,CrossEntropy
+Accuracy,0.9653,0.9579
+Precision,0.8909,0.8363
+Recall,0.7086,0.6355
+F1-score,0.7529,0.6697
+FAR,0.0071,0.0071

@@ -1,0 +1,11 @@
+# CICIDS2017 - the second dataset used by Ding et al. (TMG-GAN, IEEE TIFS 2024).
+# Point train_csv at the MachineLearningCSV flow files (a glob covering all days works).
+data:
+  format: cicids
+  train_csv: data/cicids2017/*.csv
+  test_csv: null
+  categorical_cols: []       # CICIDS2017 flow features are already numeric
+  classes: all
+  log_transform: true         # CICIDS2017 features are heavy-tailed
+balance:
+  mode: max

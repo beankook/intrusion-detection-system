@@ -1,0 +1,6 @@
+class,samples,share_%,imbalance_ratio
+Normal,2240,69.44,1.0
+DoS,490,15.19,4.6
+Reconnaissance,419,12.99,5.3
+Shellcode,45,1.39,49.8
+Worms,32,0.99,70.0

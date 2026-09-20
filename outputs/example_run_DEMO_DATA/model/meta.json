@@ -1,0 +1,28 @@
+{
+  "label_names": [
+    "Normal",
+    "DoS",
+    "Reconnaissance",
+    "Shellcode",
+    "Worms"
+  ],
+  "normal_index": 0,
+  "gan_class_names": [
+    "Normal",
+    "DoS",
+    "Reconnaissance",
+    "Shellcode",
+    "Worms"
+  ],
+  "model_kwargs": {
+    "n_features": 55,
+    "n_classes": 5,
+    "hidden": [
+      128,
+      64
+    ],
+    "dropout": 0.2,
+    "use_attention": true,
+    "attention_rescale": true
+  }
+}

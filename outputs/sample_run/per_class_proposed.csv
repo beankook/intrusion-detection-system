@@ -1,0 +1,6 @@
+class,precision,recall,f1,support
+Normal,0.9882,0.9896,0.9889,10379
+DoS,0.8547,0.5177,0.6448,761
+Reconnaissance,0.8104,0.9714,0.8837,1505
+Shellcode,0.7406,0.7202,0.7302,218
+Worms,0.8235,0.56,0.6667,25

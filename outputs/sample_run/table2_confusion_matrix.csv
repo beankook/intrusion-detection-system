@@ -1,0 +1,6 @@
+Actual \ Predicted,Normal,DoS,Reconnaissance,Shellcode,Worms
+Normal (10379),10271,47,40,21,0
+DoS (761),64,394,267,33,3
+Reconnaissance (1505),33,9,1462,1,0
+Shellcode (218),23,6,32,157,0
+Worms (25),3,5,3,0,14

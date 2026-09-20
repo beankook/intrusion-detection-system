@@ -1,0 +1,99 @@
+{
+  "demo_placeholder_data": false,
+  "proposed": {
+    "Accuracy": 0.9542209807572936,
+    "Precision": 0.8434693519389089,
+    "Recall": 0.7517892493904653,
+    "F1-score": 0.7828548375246327,
+    "FAR": 0.010405626746314674,
+    "Binary Accuracy": 0.9820763500931099,
+    "Binary Precision": 0.9566960705693665,
+    "Binary Recall": 0.9509764846552411,
+    "Binary F1-score": 0.9538277033779732
+  },
+  "baseline": {
+    "Accuracy": 0.9431253879577902,
+    "Precision": 0.7976521943591612,
+    "Recall": 0.6455303826483345,
+    "F1-score": 0.6712826601373962,
+    "FAR": 0.012043549474901242,
+    "Binary Accuracy": 0.978274363749224,
+    "Binary Precision": 0.9495764421137556,
+    "Binary Recall": 0.9382223993622958,
+    "Binary F1-score": 0.9438652766639936
+  },
+  "config": {
+    "seed": 42,
+    "device": "auto",
+    "output_dir": "outputs/sample_run",
+    "data": {
+      "train_csv": "data/UNSW_NB15_training-set.csv",
+      "test_csv": "data/UNSW_NB15_testing-set.csv",
+      "classes": [
+        "Normal",
+        "DoS",
+        "Reconnaissance",
+        "Shellcode",
+        "Worms"
+      ],
+      "task": "multiclass",
+      "test_size": 0.2,
+      "categorical_cols": [
+        "proto",
+        "service",
+        "state"
+      ],
+      "max_categories": 10,
+      "log_transform": false
+    },
+    "gan": {
+      "z_dim": 64,
+      "g_hidden": [
+        128,
+        256
+      ],
+      "f_hidden": [
+        256,
+        128
+      ],
+      "epochs": 2000,
+      "d_iters": 1,
+      "g_iters": 1,
+      "batch_size": 64,
+      "lr_g": 0.0002,
+      "lr_d": 0.0002,
+      "lambda_cos": 1.0,
+      "inter_class_weight": 1.0,
+      "lambda_cls": 1.0,
+      "log_every": 200
+    },
+    "balance": {
+      "mode": "fixed",
+      "n_synthetic": 10000,
+      "majority_classes": [
+        "Normal"
+      ],
+      "max_attempt_factor": 20
+    },
+    "classifier": {
+      "hidden": [
+        128,
+        64
+      ],
+      "dropout": 0.2,
+      "epochs": 30,
+      "batch_size": 256,
+      "lr": 0.001,
+      "optimizer": "adam",
+      "focal_gamma": 2.0,
+      "focal_alpha": null,
+      "attention_rescale": true,
+      "val_fraction": 0.1
+    },
+    "eval": {
+      "average": "macro",
+      "tsne_samples_per_group": 300
+    }
+  },
+  "runtime_s": 83.5
+}
